@@ -1,5 +1,6 @@
 <?php
   $active_page = basename($_SERVER['PHP_SELF']);
+  $current = getcwd();
 ?>
 
 <nav class="navbar nav navbar-expand-lg">
