@@ -2,7 +2,7 @@
   $active_page = basename($_SERVER['PHP_SELF']);
 ?>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar nav navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Gaming</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,6 +15,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link <?php echo (($active_page == 'games.php') ? 'active' : ''); ?>" aria-current="page" href="games.php">Games</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php echo (($active_page == 'addgame.php') ? 'active' : ''); ?>" aria-current="page" href="addgame.php">Add Game</a>
         </li>
       </ul>
     </div>
