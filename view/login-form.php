@@ -62,9 +62,9 @@
 
 </script>
 
-<h1 class="text-center">Login</h1>
-<div class="page-contents text-center">
-    <form class="text-center" action="" method="post" onsubmit="validate(event)">
+<h1 class="text-center page-title">Login</h1>
+<div class="page-contents">
+    <form class="loginForm" action="" method="post" onsubmit="validate(event)">
         <input type="text" name="username" id="username" placeholder="Username"><br>
         <input type="password" name="password" id="password" placeholder="Password"><br>
         <input type="submit" value="Submit" class="btn btn-primary">

@@ -6,7 +6,7 @@
 <body class="d-flex flex-column min-vh-100">
     <?php include "view/includes/navbar.php" ?>
 
-    <h1 class="text-center">Welcome</h1>
+    <h1 class="text-center page-title">Welcome</h1>
        
     <div class="page-contents text-center">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quae libero iure a, consectetur, nihil tempore provident ut ipsa molestiae asperiores inventore magni. Delectus, expedita. Laborum quisquam illo dolorum illum?</p>

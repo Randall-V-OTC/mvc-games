@@ -3,6 +3,10 @@ body {
     background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(116,46,168,1) 100%); 
 }
 
+.page-title {
+    margin: 3rem auto 0 auto;
+}
+
 .nav {
     background-color: rgba(103, 169, 204, 0.7);
     -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
@@ -19,16 +23,39 @@ body {
 
 .page-contents {
     background-color: rgba(103, 169, 204, 0.7);
-    display: flex;
     border: 3px solid aquamarine;
     border-radius: 5px 25px 5px 25px;
     margin: 1.75rem auto 3.75rem auto;
     justify-content: center;
     padding: 5rem;
-    width: 75%;
+    width: 65%;
+    justify-items: center;
+}
+
+.page-contents-grid {
+    background-color: rgba(103, 169, 204, 0.7);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    border: 3px solid aquamarine;
+    border-radius: 5px 25px 5px 25px;
+    margin: 1.75rem auto 3.75rem auto;
+    justify-content: center;
+    padding: 5rem;
+    width: 65%;
+    justify-items: center;
 }
 
 .page-contents form input, .page-contents form textarea {
+    margin: .75rem auto 0 auto;
+    background-color: blueviolet;
+    border-radius: 7px;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+}
+
+.page-contents form select {
     margin: .75rem auto 0 auto;
     background-color: blueviolet;
     border-radius: 7px;
@@ -45,49 +72,78 @@ body {
     background-color: blueviolet;
 }
 
-.page-contents form input:hover, .page-contents form textarea:hover {
+.page-contents form input:hover, .page-contents form textarea:hover, .page-contents form select:hover {
     background-color: khaki;
 }
 
 .mainGameDiv {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    max-width: 12rem;
-    min-width: 10rem;
-    clear: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12rem;
     justify-content: space-between;
     padding: .5rem;
-    border: 1px dotted teal;
+    border: 1px solid teal;
+    background: linear-gradient(0deg, rgba(55,106,153,1) 16%, rgba(52,70,124,1) 50%);
     margin: 0 .5rem 0 0;
 }
 
+.mainGameDiv:hover {
+    background: linear-gradient(0deg, rgba(55,106,153,1) 16%, rgba(52,70,124,1) 100%);
+}
+
 .gameImg img {
-    max-width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 155px;
+    height: 215px;
     border: 1px solid black;
 }
 
 .gameTitle {
-    margin: auto;
+    background-color: black;
     justify-items: center;
-    padding: 0px;
 }
 
 .gameDesc {
-    flex-direction: column;
-    margin: 0 0 .5rem 0;
+    background-color: blue;
 }
 
 .gamePlatform {
-    flex-direction: row;
+    background-color: red;
 }
 
 .gameGenre {
+    background-color: blueviolet;
+}
+
+.gameTitle, .gameDesc, .gamePlatform, .gameGenre {
     flex-direction: row;
+    width: 155px;
+    padding: 0;
+    margin: 0;
 }
 
 .addGameForm {
+    margin: auto;
+    padding: 1.5rem;
     border: 2px dashed black;
     width: 75%;
     border-radius: 25px 0 25px 0;
+}
+
+.inputtedGameInfo {
+    border: 2px solid green;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.platIcon {
+    width: 28px;
+    padding: 0;
 }

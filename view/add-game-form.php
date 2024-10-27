@@ -2,14 +2,21 @@
 
     function showError(element, show) {
 
-        let elementError = document.getElementById(element.id + 'Error');
+        console.log('in showError()');
 
-        if (!elementError) return;
+        let elementStyle = document.getElementById(element).style;
+        let elementError = document.getElementById(element + 'Error');
 
-        if (!show) {
-            element.style.display = "none";
+        console.log(elementError);
+
+        if (show) {
+            elementError.style.display = "inline-block";
+            elementStyle.border = '1px solid red';
+            console.log(elementError + 'should display.');
         } else {
-            element.style.display = "inline-block";
+            elementError.style.display = "none";
+            elementStyle.border = '';
+            console.log(elementError + 'should not display');
         }
 
     }
@@ -18,34 +25,38 @@
 
         e.preventDefault();
 
+        let gameName = document.getElementById('gameName');
+        let gamePlatform = document.getElementById('gamePlatform');
+        let gameGenre = document.getElementById('gameGenre');
+        let gameReleaseDate = document.getElementById('gameReleaseDate');
+        let gameWebsiteURL = document.getElementById('gameWebsiteURL');
+        let gameImg = document.getElementById('gameImg');
+        let gameDesc = document.getElementById('gameDesc');
+
+        let elements = [gameName, gamePlatform, gameGenre, gameReleaseDate, gameWebsiteURL, gameImg, gameDesc];
+
         let formValid = true;
 
-        // grab the form as a whole and then grab all of the elements
-        let formElements = document.querySelector('.addGameForm').elements;
-
-        // loop over all of the elements
-        for (let element of formElements) {
-
-            if (element.value.trim() === "" ) {
-
+        elements.forEach((element) => {
+            if (element.value === "") {
+                console.log(element.id + " is required.");
+                showError(element.id, true);
                 formValid = false;
-                showError(element, true);
-
             } else {
-                showError(element, false);
+                showError(element.id, false);
             }
-
-        }
-
+        });
+        
         if (formValid) {
-            document.querySelector('.addGameForm').submit();
+            console.log('should submit.');
+            document.querySelector('form.addGameForm').submit();
         }
 
     }
 
 </script>
 
-<form class="addGameForm" action="../mvc-games/addgame.php" onsubmit="validate(event)" method="post" enctype="multipart/form-data">
+<form class="addGameForm" id="addGameForm" action="../mvc-games/addgame.php" onsubmit="validate(event)" method="post" enctype="multipart/form-data">
 
     <label for="gameName">Game Name:</label>
     <input type="text" name="gameName" id="gameName">
@@ -54,7 +65,13 @@
     <br>
 
     <label for="gamePlatform">Game Platform:</label>
-    <input type="text" name="gamePlatform" id="gamePlatform">
+    <select name="gamePlatform" id="gamePlatform">
+        <option selected value="" disabled>Choose platform</option>
+        <option value="Xbox">Xbox</option>
+        <option value="PlayStation">PlayStation</option>
+        <option value="Nintendo">Nintendo</option>
+        <option value="PC">PC</option>
+    </select>
     <span id="gamePlatformError" style="display: none; color: red;">*Required*</span>
 
     <br>
@@ -89,6 +106,6 @@
 
     <br>
 
-    <input type="submit" value="Submit" class="btn btn-primary mb-4" name="submit" id="submit">
+    <input type="submit" value="Submit" class="btn btn-primary mb-4">
 
 </form>
