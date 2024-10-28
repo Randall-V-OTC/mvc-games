@@ -46,6 +46,54 @@ body {
     justify-items: center;
 }
 
+@media only screen and (max-width: 1480px) {
+    .page-contents-grid {
+        background-color: rgba(103, 169, 204, 0.7);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        border: 3px solid aquamarine;
+        border-radius: 5px 25px 5px 25px;
+        margin: 1.75rem auto 3.75rem auto;
+        justify-content: center;
+        padding: 5rem;
+        width: 65%;
+        justify-items: center;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .page-contents-grid {
+        background-color: rgba(103, 169, 204, 0.7);
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2.5rem;
+        border: 3px solid aquamarine;
+        border-radius: 5px 25px 5px 25px;
+        margin: 1.75rem auto 3.75rem auto;
+        justify-content: center;
+        padding: 5rem;
+        width: 65%;
+        justify-items: center;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .page-contents-grid {
+        background-color: rgba(103, 169, 204, 0.7);
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2.5rem;
+        border: 3px solid aquamarine;
+        border-radius: 5px 25px 5px 25px;
+        margin: 1.75rem auto 3.75rem auto;
+        justify-content: center;
+        padding: 5rem;
+        width: 65%;
+        justify-items: center;
+    }
+}
+
 .page-contents form input, .page-contents form textarea {
     margin: .75rem auto 0 auto;
     background-color: blueviolet;
