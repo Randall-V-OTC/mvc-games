@@ -62,11 +62,11 @@ body {
     }
 }
 
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 1260px) {
     .page-contents-grid {
         background-color: rgba(103, 169, 204, 0.7);
         display: grid;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 2.5rem;
         border: 3px solid aquamarine;
         border-radius: 5px 25px 5px 25px;
@@ -78,7 +78,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 1260px) {
+@media only screen and (max-width: 960px) {
     .page-contents-grid {
         background-color: rgba(103, 169, 204, 0.7);
         display: grid;

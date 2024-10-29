@@ -33,6 +33,10 @@
                         echo("<script>alert('User does not exist or username and/or password are incorrect.');</script>");
                     }
 
+                case "edit_game":
+                    include "view/edit-game-form.php";
+                    break;
+
                 default:
                     include "view/login-form.php";
 
