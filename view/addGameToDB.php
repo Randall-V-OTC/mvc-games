@@ -1,5 +1,4 @@
 <?php
-
     include "model/game_db.php";
 ?>
 

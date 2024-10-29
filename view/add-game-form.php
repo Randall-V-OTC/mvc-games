@@ -20,14 +20,14 @@
         // if action is edit lets grab the passed data
         if ($_GET['action'] === "edit_game") {
 
-            $id = $_POST['gameId'];
-            $name = $_POST['gameName'];
-            $platform = $_POST['gamePlatform'];
-            $genre = $_POST['gameGenre'];
-            $releaseDate = $_POST['gameReleaseDate'];
-            $websiteURL = $_POST['gameWebsiteURL'];
-            $gameImg = $_POST['gameImg'];
-            $desc = $_POST['gameDesc'];
+            $id = htmlspecialchars($_POST['gameId']);
+            $name = htmlspecialchars($_POST['gameName']);
+            $platform = htmlspecialchars($_POST['gamePlatform']);
+            $genre = htmlspecialchars($_POST['gameGenre']);
+            $releaseDate = htmlspecialchars($_POST['gameReleaseDate']);
+            $websiteURL = htmlspecialchars($_POST['gameWebsiteURL']);
+            $gameImg = htmlspecialchars($_POST['gameImg']);
+            $desc = htmlspecialchars($_POST['gameDesc'], ENT_QUOTES);
 
         }
 
@@ -94,23 +94,15 @@
 
     }
 
-    function getCurrentPlatform() {
-
-        switch ($_POST['gamePlatform']) {
-
-            case "Xbox":
-                return "Xbox";
-            
-            case "PlayStation":
-                return "PlayStation";
-
-        }
-
-    }
-
 </script>
 
 <h1><?=$heading?></h1>
+
+<?php
+    if ($_GET['action'] === "edit_game") {
+        echo("<img src='$gameImg' title='Current Game Image' alt='Current Game Image' style='display: inline-flex; margin: 0 auto 1.5rem auto; width: 155px; height: 215px; border: 1px solid black;'>");
+    }
+?>
 
 <form class="addGameForm" id="addGameForm" action="../mvc-games/addgame.php" onsubmit="validate(event)" method="post" enctype="multipart/form-data">
 
@@ -125,7 +117,7 @@
         if ($_GET['action'] === "edit_game") {
             echo("<input type='text' name='gameName' id='gameName' value='$name'>");
         } else {
-            echo("<input type='text' name='gameName' id='gameName'>");
+            echo("<input type='text' name='gameName' id='gameName' value=''>");
         }
     ?>
     <span id="gameNameError" style="display: none; color: red;">*Required*</span>
@@ -158,41 +150,91 @@
             <option value='Nintendo'>Nintendo</option>
             <option value='PC'>PC</option>
         </select>
-        <span id='gamePlatformError' style='display: none; color: red;'>*Required*</span>
         ");
 
         }
+        echo("<span id='gamePlatformError' style='display: none; color: red;'>*Required*</span>");
     ?>
+    <!--------- END GAME PLATFORM LOGIC -------->
     
     <br>
 
+    <!--
+        Game genre logic
+    -->
     <label for="gameGenre">Game Genre:</label>
-    <input type="text" name="gameGenre" id="gameGenre">
+    <?php
+        if ($_GET['action'] === "edit_game") {
+            echo("<input type='text' name='gameGenre' id='gameGenre' value='$genre'>");
+        } else {
+            echo("<input type='text' name='gameGenre' id='gameGenre' value=''>");
+        }
+    ?>
     <span id="gameGenreError" style="display: none; color: red;">*Required*</span>
+    <!-- END GAME GENRE LOGIC -->
 
     <br>
 
+    <!--
+        Game release date logic
+    -->
     <label for="gameReleaseDate">Release Date:</label>
-    <input type="date" name="gameReleaseDate" id="gameReleaseDate">
+    <?php
+        if ($_GET['action'] === "edit_game") {
+            echo("<input type='date' name='gameReleaseDate' id='gameReleaseDate' value='$releaseDate'>");
+        } else {
+            echo("<input type='date' name='gameReleaseDate' id='gameReleaseDate' value=''>");
+        }
+    ?>
     <span id="gameReleaseDateError" style="display: none; color: red;">*Required*</span>
+    <!-- END RELEASE DATE LOGIC -->
 
     <br>
 
+    <!-- BEGIN WEBSITE URL LOGIC -->
     <label for="gameWebsiteURL">Website URL:</label>
-    <input type="text" name="gameWebsiteURL" id="gameWebsiteURL">
+    <?php
+        if ($_GET['action'] === "edit_game") {
+            echo("<input type='text' name='gameWebsiteURL' id='gameWebsiteURL' value='$websiteURL'>");
+        } else {
+            echo("<input type='text' name='gameWebsiteURL' id='gameWebsiteURL' value=''>");
+        }
+    ?>
     <span id="gameWebsiteURLError" style="display: none; color: red;">*Required*</span>
+    <!-- END WEBSITE URL LOGIC -->
 
     <br>
 
-    <label for="gameImg">Choose Image:</label>
-    <input type="file" name="gameImg" id="gameImg">
+    <!-- BEGIN GAME IMG LOGIC -->
+    <?php
+        if ($_GET['action'] === "edit_game") {
+            echo("
+                <label for='gameImg'>Change Image:</label>
+                <input type='file' name='gameImg' id='gameImg'>
+            ");
+        } else {
+            echo("
+                <label for='gameImg'>Choose Image:</label>
+                <input type='file' name='gameImg' id='gameImg'>
+            ");
+        }
+    ?>
     <span id="gameImgError" style="display: none; color: red;">*Required*</span>
+    <!-- END GAME IMG LOGIC -->
 
     <br>
 
+    <!-- BEGIN GAME DESCRIPTION LOGIC -->
     <label for="gameDesc">Game Description:</label>
-    <textarea name="gameDesc" id="gameDesc"></textarea>
+    <?php
+        if ($_GET['action'] === "edit_game") {
+            echo("<textarea name='gameDesc' id='gameDesc'>$desc</textarea>");
+        } else {
+            echo("<textarea name='gameDesc' id='gameDesc'></textarea>");
+        }
+    ?>
     <span id="gameDescError" style="display: none; color: red;">*Required*</span>
+    <!-- END GAME DESCRIPTION LOGIC -->
 
     <br>
 
