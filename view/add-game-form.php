@@ -104,7 +104,20 @@
     }
 ?>
 
-<form class="addGameForm" id="addGameForm" action="../mvc-games/addgame.php" onsubmit="validate(event)" method="post" enctype="multipart/form-data">
+<!-- 
+ If we are updating the game, make sure the form submits with a get action of update game
+ so we can use that later
+-->
+<?php
+
+    if ($_GET['action'] === 'edit_game') {
+        echo("<form class='addGameForm' id='addGameForm' action='../mvc-games/addgame.php?action=update_game' onsubmit='validate(event)' method='post' enctype='multipart/form-data'>");
+    } else {
+        echo("<form class='addGameForm' id='addGameForm' action='../mvc-games/addgame.php' onsubmit='validate(event)' method='post' enctype='multipart/form-data'>");
+    }
+
+?>
+<!-- <form class="addGameForm" id="addGameForm" action="../mvc-games/addgame.php" onsubmit="validate(event)" method="post" enctype="multipart/form-data"> -->
 
     <!--
         Game Name:
@@ -238,6 +251,10 @@
 
     <br>
 
+    <?php if ($_GET['action'] === 'edit_game') {
+        echo("<input type='hidden' name='gameId' id='gameId' value='$id'>");
+    }
+    ?>
     <input type="submit" value="Submit" class="btn btn-primary mb-4">
 
 </form>

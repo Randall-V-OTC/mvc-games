@@ -76,12 +76,15 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // grab all of the passed fields
+            $gameId = $_POST['gameId'];
             $gameName = $_POST['gameName'];
             $gamePlatform = $_POST['gamePlatform'];
             $gameGenre = $_POST['gameGenre'];
             $gameReleaseDate = $_POST['gameReleaseDate'];
             $gameWebsiteURL = $_POST['gameWebsiteURL'];
             $gameDesc = $_POST['gameDesc'];
+
+            $edit = $_GET['action'] == "update_game" ? "update_game" : "";
 
             // proper way to handle the passed images directory location
             $target_dir = "../model/images/";
@@ -102,6 +105,29 @@
             //echo("<script>alert('directory: $img_directory');</script>");
 
             $target_file = $img_directory . basename($file["name"]);
+
+            // if this is an edit_game instead of add game then go here first
+            if ($edit === "update_game") {
+
+                $update_query = "UPDATE `game` SET `game_name` = '$gameName', `game_description` = '$gameDesc', 
+                `game_website_url` = '$gameWebsiteURL', `game_img_url` = 'model/images/$imgName', 
+                `game_genre` = '$gameGenre', `game_platform` = '$gamePlatform' WHERE `game`.`game_id` = $gameId; ";
+
+                //echo("<script>alert('update?');</script>");
+
+                try {
+
+                    $result = $db->query($update_query);
+
+                    return true;
+
+                }
+                catch (PDOException $ex) {
+                    echo("Error updating game -> game_db.php -> submitToDatabse(): " . $ex->getMessage());
+                }
+                return false;
+
+            }
 
             // insert query to insert our newly filled out form information to our database
             $insert_qry = "INSERT INTO `game` (`game_name`, `game_description`, `game_release_date`, `game_website_url`, 
@@ -157,6 +183,16 @@
             //echo("<script>alert('Method does equal post.');</script>");
 
             if (isset($_FILES['gameImg'])) {
+
+                //----------------------- DELETE BELOW??????
+                // if ($_POST['action'] === "edit_game") {
+
+                //     echo("<script>Game updated!</script>");
+
+                //     return true;
+
+                // }
+                //--------------------- END DELETE?????
 
                 // debugging
                 //echo("<script>alert('gameImg is set.');</script>");

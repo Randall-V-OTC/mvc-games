@@ -30,7 +30,9 @@
                         include "view/display_games.php";
                         break;
                     } else {
+                        include "view/login-form.php";
                         echo("<script>alert('User does not exist or username and/or password are incorrect.');</script>");
+                        break;
                     }
 
                 case "edit_game":
