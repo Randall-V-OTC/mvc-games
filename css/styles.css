@@ -120,7 +120,7 @@ body {
     background-color: blueviolet;
 }
 
-.page-contents form input:hover, .page-contents form textarea:hover, .page-contents form select:hover {
+.page-contents form input:hover, form textarea:hover, form select:hover {
     background-color: khaki;
 }
 

@@ -109,9 +109,15 @@
             // if this is an edit_game instead of add game then go here first
             if ($edit === "update_game") {
 
-                $update_query = "UPDATE `game` SET `game_name` = '$gameName', `game_description` = '$gameDesc', 
-                `game_website_url` = '$gameWebsiteURL', `game_img_url` = 'model/images/$imgName', 
-                `game_genre` = '$gameGenre', `game_platform` = '$gamePlatform' WHERE `game`.`game_id` = $gameId; ";
+                if ($imgName === '') {
+                    $update_query = "UPDATE `game` SET `game_name` = '$gameName', `game_description` = '$gameDesc', 
+                `game_website_url` = '$gameWebsiteURL', `game_genre` = '$gameGenre', 
+                `game_platform` = '$gamePlatform' WHERE `game`.`game_id` = $gameId; ";
+                } else {
+                    $update_query = "UPDATE `game` SET `game_name` = '$gameName', `game_description` = '$gameDesc', 
+                    `game_website_url` = '$gameWebsiteURL', `game_img_url` = 'model/images/$imgName', 
+                    `game_genre` = '$gameGenre', `game_platform` = '$gamePlatform' WHERE `game`.`game_id` = $gameId; ";
+                }
 
                 //echo("<script>alert('update?');</script>");
 
@@ -209,7 +215,7 @@
 
                 //echo("<script>alert('$target_file');</script>");
 
-                if (move_uploaded_file($file["tmp_name"], $target_file)) {
+                if ($_GET['action'] === 'update_game') {
 
                     try {
 
@@ -220,11 +226,27 @@
                     catch (PDOExcaption $ex) {
                         echo("<script>console.log('game_db.php : upload() - $ex->getMessage');</script>");
                     }
-
                     return true;
                 } else {
-                    return false;
+
+                    if (move_uploaded_file($file["tmp_name"], $target_file)) {
+
+                        try {
+
+                            // submit to the db
+                            submitToDatabase();
+
+                        }
+                        catch (PDOExcaption $ex) {
+                            echo("<script>console.log('game_db.php : upload() - $ex->getMessage');</script>");
+                        }
+
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
+                return false;
 
             }
 

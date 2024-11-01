@@ -61,7 +61,7 @@
 
     }
 
-    function validate(e) {
+    function validate(e, update) {
 
         e.preventDefault();
 
@@ -72,8 +72,22 @@
         let gameWebsiteURL = document.getElementById('gameWebsiteURL');
         let gameImg = document.getElementById('gameImg');
         let gameDesc = document.getElementById('gameDesc');
+        let keepImg = document.getElementById('keepImg');
 
-        let elements = [gameName, gamePlatform, gameGenre, gameReleaseDate, gameWebsiteURL, gameImg, gameDesc];
+        let elements = [gameName, gamePlatform, gameGenre, gameReleaseDate, gameWebsiteURL, gameDesc];
+
+        if (update) {
+
+        }
+        
+        // if updating the game then don't force the user to require a new image
+        if (keepImg != null) {
+
+            if (!keepImg.checked) {
+                elements.push(gameImg);
+            }
+
+        }
 
         let formValid = true;
 
@@ -91,6 +105,17 @@
             console.log('should submit.');
             document.querySelector('form.addGameForm').submit();
         }
+
+    document.getElementById('keepImg').addEventListener('click', function() {
+
+        if (document.getElementById('keepImg').checked) {
+
+            document.getElementById('gameImgError').style.display = "none";
+            document.getElementById('gameImg').style.border = "none";
+
+        }
+
+    });
 
     }
 
@@ -111,9 +136,9 @@
 <?php
 
     if ($_GET['action'] === 'edit_game') {
-        echo("<form class='addGameForm' id='addGameForm' action='../mvc-games/addgame.php?action=update_game' onsubmit='validate(event)' method='post' enctype='multipart/form-data'>");
+        echo("<form class='addGameForm' id='addGameForm' action='../mvc-games/addgame.php?action=update_game' onsubmit='validate(event, true)' method='post' enctype='multipart/form-data'>");
     } else {
-        echo("<form class='addGameForm' id='addGameForm' action='../mvc-games/addgame.php' onsubmit='validate(event)' method='post' enctype='multipart/form-data'>");
+        echo("<form class='addGameForm' id='addGameForm' action='../mvc-games/addgame.php' onsubmit='validate(event, false)' method='post' enctype='multipart/form-data'>");
     }
 
 ?>
@@ -221,9 +246,15 @@
     <!-- BEGIN GAME IMG LOGIC -->
     <?php
         if ($_GET['action'] === "edit_game") {
+            $img = $_POST['gameImg'];
             echo("
                 <label for='gameImg'>Change Image:</label>
-                <input type='file' name='gameImg' id='gameImg'>
+                <input type='file' name='gameImg' id='gameImg' value='$gameImg'>
+                <input type='hidden' name='gameImgUpdate' id='gameImgUpdate' value='$img'>
+                <div>
+                    <input type='checkbox' name='keepImg' id='keepImg'>
+                    <label for='keepImg'>Keep Current Image?</label>
+                </div>
             ");
         } else {
             echo("
@@ -255,6 +286,27 @@
         echo("<input type='hidden' name='gameId' id='gameId' value='$id'>");
     }
     ?>
+    <input type='hidden' name='gameId' id='gameId' value='$id'>
     <input type="submit" value="Submit" class="btn btn-primary mb-4">
 
 </form>
+
+<script>
+
+    img = document.getElementById('gameImg').value;
+    let checkbox = document.getElementById('keepImg');
+
+    document.getElementById('keepImg').addEventListener('click', function() {
+
+        const file = document.getElementById('gameImg').files[0] = img;
+
+        if (checkbox.checked) {
+            console.log(file);
+            document.getElementById('gameImg').files[0] = img;
+        } else {
+            document.getElementById('gameImg').files[0] = '';
+        }
+
+    });
+
+</script>

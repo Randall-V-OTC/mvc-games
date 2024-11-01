@@ -6,10 +6,13 @@
     <?php if (upload()) {
         $uploaded_img = basename($_FILES['gameImg']['name']);
         $img_path = "model/images/" . $uploaded_img;
+        if ($uploaded_img === '') {
+            $img_path = $_POST['gameImgUpdate'];
+        }
         
         if ($_GET['action'] === 'update_game') {
             echo("<h3>Game was successfully updated. You can now <a href='mvc-games/games.php'>log in</a> and see the new details. &#x1F603;</h3><br>");
-            echo("<h5>Here's the update game information:</h5>
+            echo("<h5>Here's the updated game information:</h5>
             <div class='updatedGameInfo text-start'>
                 Game Name: " . $_POST['gameName'] . "<br>" .
                 "Game Platform: " . $_POST['gamePlatform'] . "<br>" .
@@ -36,7 +39,11 @@
             );
         }
     } else {
-        echo("<h3>There was an error adding the game to the database.</h3>");
+        if ($_GET['action'] === 'update_game') {
+            echo("<h3>There was an error updating the game.</h3>");
+        } else {
+            echo("<h3>There was an error adding the game to the database.</h3>");
+        }
     }
     ?>
 </div>
