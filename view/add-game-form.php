@@ -33,9 +33,6 @@
 
     }
 
-    // ternary operator to show the appropriate header
-    $heading = $_GET['action'] === "add" ? "Add A Game" : "Edit Game";
-
 ?>
 
 <script>
@@ -121,8 +118,6 @@
 
 </script>
 
-<h1><?=$heading?></h1>
-
 <?php
     if ($_GET['action'] === "edit_game") {
         echo("<img src='$gameImg' title='Current Game Image' alt='Current Game Image' style='display: inline-flex; margin: 0 auto 1.5rem auto; width: 155px; height: 215px; border: 1px solid black;'>");
@@ -138,7 +133,7 @@
     if ($_GET['action'] === 'edit_game') {
         echo("<form class='addGameForm' id='addGameForm' action='../mvc-games/addgame.php?action=update_game' onsubmit='validate(event, true)' method='post' enctype='multipart/form-data'>");
     } else {
-        echo("<form class='addGameForm' id='addGameForm' action='../mvc-games/addgame.php' onsubmit='validate(event, false)' method='post' enctype='multipart/form-data'>");
+        echo("<form class='addGameForm' id='addGameForm' action='../mvc-games/addgame.php?action=add_game' onsubmit='validate(event, false)' method='post' enctype='multipart/form-data'>");
     }
 
 ?>
@@ -282,11 +277,12 @@
 
     <br>
 
-    <?php if ($_GET['action'] === 'edit_game') {
+    <!-- <?php if ($_GET['action'] === 'edit_game') {
+        echo("<script>alert('game id = $id');</script>");
         echo("<input type='hidden' name='gameId' id='gameId' value='$id'>");
     }
-    ?>
-    <input type='hidden' name='gameId' id='gameId' value='$id'>
+    ?> -->
+    <input type='hidden' name='gameId' id='gameId' value='<?=$id?>'>
     <input type="submit" value="Submit" class="btn btn-primary mb-4">
 
 </form>

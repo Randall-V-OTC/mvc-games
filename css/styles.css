@@ -152,6 +152,9 @@ body {
 .gameTitle {
     background-color: black;
     justify-items: center;
+    word-break: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
 .gameDesc {

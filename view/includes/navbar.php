@@ -19,7 +19,7 @@
           <a class="nav-link <?php echo (($active_page == 'games.php') ? 'active' : ''); ?>" aria-current="page" href="games.php">Games</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?php echo (($active_page == 'addgame.php') ? 'active' : ''); ?>" aria-current="page" href="addgame.php">Add Game</a>
+          <a class="nav-link <?php echo (($active_page == 'addgame.php') ? 'active' : ''); ?>" aria-current="page" href="addgame.php?action=add">Add Game</a>
         </li>
 
         

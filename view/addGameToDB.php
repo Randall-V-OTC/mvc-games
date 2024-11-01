@@ -11,7 +11,7 @@
         }
         
         if ($_GET['action'] === 'update_game') {
-            echo("<h3>Game was successfully updated. You can now <a href='mvc-games/games.php'>log in</a> and see the new details. &#x1F603;</h3><br>");
+            echo("<h3>Game was successfully updated. You can now <a href='games.php'>log in</a> and see the new details. &#x1F603;</h3><br>");
             echo("<h5>Here's the updated game information:</h5>
             <div class='updatedGameInfo text-start'>
                 Game Name: " . $_POST['gameName'] . "<br>" .
@@ -25,7 +25,7 @@
             );
         } else {
 
-            echo("<h3>Game was successfully added to the database. You can now <a href='mvc-games/games.php'>log in</a> and see the new addition. &#x1F603;</h3><br>");
+            echo("<h3>Game was successfully added to the database. You can now <a href='games.php'>log in</a> and see the new addition. &#x1F603;</h3><br>");
             echo("<h5>Here's the information you entered:</h5>
             <div class='inputtedGameInfo text-start'>
                 Game Name: " . $_POST['gameName'] . "<br>" .
